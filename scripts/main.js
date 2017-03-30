@@ -1,0 +1,1 @@
+"use strict";$(function(){function t(){Webcam.snap(function(t){var e=new Image;e.src=t,$("#object-detection-output").empty().append(e)})}Webcam.set({width:320,height:240,image_format:"png"}),Webcam.attach("#object-detection-input");Webcam.on("live",function(){setInterval(t,1e3)})});
