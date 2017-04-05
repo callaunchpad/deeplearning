@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Deep Learning at Launchpad</title>
+    <title>Sherlock: Deep Vision</title>
     <meta name='subject' content='Software' />
     <meta name='description' content='We are a group of UC Berkeley students that use machine learning, AI, and data science techniques to solve problems by building intelligent software.' />
     <meta name='keywords' content='intelligent, software, machine learning, artificial intelligence, data science, Berkeley, Cal, Sherlock, Whisper, Lively, Launchpad' />
@@ -32,8 +32,6 @@
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900" rel="stylesheet">
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.22/webcam.min.js"></script>
-
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="/bower_components/materialize/bin/materialize.css" />
@@ -55,32 +53,35 @@
 
     <nav class="grey darken-4">
       <div class="nav-wrapper">
-        <img src="images/logo_white.png" class="center">
+        <a href="https://callaunchpad.org" target="_blank">
+          <img src="images/logo_white.png" class="center">
+        </a>
       </div>
     </nav>
 
     <div id="intro" class="container">
       <div class="row">
-        <h1 class="blue-text text-darken-1">Deep Vision with MXNet</h1>
-        <hr>
+        <h1 class="blue-text text-darken-1">Project Sherlock</h1>
+        <h2 class="grey-text-darken-4">Deep Vision with MXNet</h2>
+        <p>(IN PROGRESS) Live demos of deep neural networks trained for computer vision tasks.</p>
       </div>
     </div>
 
-    <div id="object-detection" class="container demo">
-      <div class="row">
-        <h1>Object Detection using Faster R-CNN</h1>
-        <p>By using convolution, we can use features of captured images to identify objects with bounding boxes.</p>
-      </div>
+    <div id="demo">
+      <form id="api-features" class="z-depth-3" action="#">
+        <p>
+          <input name="feature1" type="radio" id="test1" checked />
+          <label for="test1">Object Detection</label>
+        </p>
+      </form>
 
-      <div class="demo-content row">
-        <div class="col s12 m6">
-          <h2 class="grey-text">Input</h2>
-          <div id="object-detection-input"></div>
-        </div>
-        <div class="col s12 m6">
-          <h2 class="grey-text">Output</h2>
-          <div id="object-detection-output"></div>
-        </div>
+      <video></video>
+      <canvas></canvas>
+
+      <a id="action-button" class="waves-effect waves-light btn-large blue">Snap!</a>
+      
+      <div class="overlay">
+        <p class="white-text">Processing...</p>
       </div>
     </div>
     
@@ -109,7 +110,7 @@
     <!-- endbuild -->
     
     <!-- build:js scripts/main.js -->
-    <script src="scripts/object-detection.js"></script>
+    <script src="scripts/webcam.js"></script>
     <!-- endbuild -->
   </body>
 </html>
