@@ -4,6 +4,9 @@ $(function() {
   var streaming = false;
   var width = 0;
   var height = 0;
+  var kairos = new Kairos("e625d980", "7c0a6aa7a06ce76483d87e6fd075d269");
+
+
   
   /*** BEGIN WEBCAM ***/
   navigator.getMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
@@ -73,8 +76,34 @@ $(function() {
 
       // Face Recognition
       else {
+        var image_data = String(img);
+        // This is to deal with the javascript format of image strings
+        image_data = image_data.replace("data:image/jpeg;base64,", "");
+        image_data = image_data.replace("data:image/jpg;base64,", "");
+        image_data = image_data.replace("data:image/png;base64,", "");
+        image_data = image_data.replace("data:image/gif;base64,", "");
+        image_data = image_data.replace("data:image/bmp;base64,", "");
+        var options = {"selector": "FULL"};
+        kairos.detect(image_data, myDetectCallback, options);
+
 
       }
+
+      function myDetectCallback(response)
+        {
+            var jsonResponse = JSON.parse(response.responseText);
+            var faces = jsonResponse.images[0].faces;
+            var face;
+
+            for (var i = 0; i < faces.length; i++) {
+              context.lineWidth = "6";
+              context.strokeStyle = "red";
+              face = faces[i];
+              context.rect(face.topLeftX, face.topLeftY, face.width, face.height);
+              context.stroke();
+            }
+            
+        }
 
 
 
@@ -105,6 +134,7 @@ $(function() {
 
 
 });
+
 
 /*** HANDLE SWITCHING BETWEEN MODES ***/
 var mode = 'f1';
