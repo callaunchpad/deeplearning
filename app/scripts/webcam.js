@@ -141,7 +141,7 @@ $(function() {
       // Hide canvas
       $('canvas').css('display', 'none');
 
-      $('#speech').text("Send me a snap!");
+      $('#speech').text('Send me a snap!');
     }
   });
 });
