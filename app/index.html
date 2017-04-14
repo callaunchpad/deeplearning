@@ -86,11 +86,7 @@
         <form id="api-features" class="z-depth-3">
           <p>
             <input name="features" type="radio" id="f1" onclick="changeMode('f1')" checked />
-            <label for="f1">Object Recognition</label>
-          </p>
-          <p>
-            <input name="features" type="radio" id="f2" onclick="changeMode('f2')" />
-            <label for="f2">Face Recognition</label>
+            <label for="f1">Face Recognition</label>
           </p>
         </form>
 
@@ -105,7 +101,6 @@
       </div>
     </div>
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
       function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
@@ -130,10 +125,6 @@
     <!-- endbuild -->
 
     <!-- build:js scripts/main.js -->
-    <script src="scripts/mxnet/libmxnet_predict.js"></script>
-    <script src="scripts/mxnet/nprogress.js"></script>
-    <script src="scripts/mxnet/mxnet_predict.js"></script>
-    <script src="scripts/classify_image.js"></script>
     <script src="scripts/kairos.js"></script>
     <script src="scripts/webcam.js"></script>
     <!-- endbuild -->

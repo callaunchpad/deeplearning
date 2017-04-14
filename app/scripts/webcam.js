@@ -60,17 +60,8 @@ $(function() {
       $('video').css('display', 'none');
       $('canvas').css('display', 'block');
 
-
-
-      // Object Detection (Single)
-      if (mode == 'f1') {
-        var image = new Image();
-        image.src = img;
-        start2(img);
-      }
-
       // Face Recognition
-      else if (mode == 'f2') {
+      if (mode == 'f1') {
         // Change action button text
         $('#action-button').text('Reset');
 
