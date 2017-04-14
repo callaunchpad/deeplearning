@@ -64,7 +64,9 @@ $(function() {
 
       // Object Detection (Single)
       if (mode == 'f1') {
-
+        var image = new Image();
+        image.src = img;
+        start2(img);
       }
 
       // Face Recognition
