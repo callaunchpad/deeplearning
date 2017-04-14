@@ -4,10 +4,10 @@ $(function() {
   var streaming = false;
   var width = 0;
   var height = 0;
-  
+
   /*** BEGIN WEBCAM ***/
   navigator.getMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
-  
+
   navigator.getMedia({ video: true, audio: false }, function(stream) {
     if(navigator.mozGetUserMedia)
       video.mozSrcObject = stream;
@@ -26,7 +26,7 @@ $(function() {
     if (!streaming) {
       width = $('video').width();
       height = $('video').height();
-    
+
       video.setAttribute('width', width);
       video.setAttribute('height', height);
       canvas.setAttribute('width', width);
@@ -64,7 +64,7 @@ $(function() {
       // Object Detection (Single)
       if (mode == 'f1') {
 
-      } 
+      }
 
       // Object Detection (Real-time)
       else if (mode == 'f2') {
@@ -81,7 +81,7 @@ $(function() {
       // Simluate HTTP request
       setTimeout(function() {
         status = 'result';
-        
+
         // Hide overlay
         $('.overlay').css('display', 'none');
 
