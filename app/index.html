@@ -41,7 +41,7 @@
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-    
+
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="/bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
@@ -98,13 +98,13 @@
         <canvas></canvas>
 
         <a id="action-button" class="waves-effect waves-light btn-large blue">Snap!</a>
-        
+
         <div class="overlay">
           <p class="white-text">Processing...</p>
         </div>
       </div>
     </div>
-    
+
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -128,8 +128,12 @@
     <script src="/bower_components/materialize/bin/materialize.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-    
+
     <!-- build:js scripts/main.js -->
+    <script src="scripts/mxnet/libmxnet_predict.js"></script>
+    <script src="scripts/mxnet/nprogress.js"></script>
+    <script src="scripts/mxnet/mxnet_predict.js"></script>
+    <script src="scripts/classify_image.js"></script>
     <script src="scripts/kairos.js"></script>
     <script src="scripts/webcam.js"></script>
     <!-- endbuild -->
