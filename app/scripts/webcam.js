@@ -4,7 +4,7 @@ $(function() {
   var streaming = false;
   var width = 0;
   var height = 0;
-  var kairos = new Kairos("f51c3249", "d6814b899b064fb58df942943afa3cb2");
+  var kairos = new Kairos('f51c3249', 'd6814b899b064fb58df942943afa3cb2');
   
   /*** BEGIN WEBCAM ***/
   navigator.getMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
@@ -73,12 +73,12 @@ $(function() {
 
         var image_data = String(img);
         // Dealing with Javascript Format of Image Strings
-        image_data = image_data.replace("data:image/jpeg;base64,", "");
-        image_data = image_data.replace("data:image/jpg;base64,", "");
-        image_data = image_data.replace("data:image/png;base64,", "");
-        image_data = image_data.replace("data:image/gif;base64,", "");
-        image_data = image_data.replace("data:image/bmp;base64,", "");
-        var options = {"selector": "FULL"};
+        image_data = image_data.replace('data:image/jpeg;base64,', '');
+        image_data = image_data.replace('data:image/jpg;base64,', '');
+        image_data = image_data.replace('data:image/png;base64,', '');
+        image_data = image_data.replace('data:image/gif;base64,', '');
+        image_data = image_data.replace('data:image/bmp;base64,', '');
+        var options = {'selector': 'FULL'};
 
         function kairosCallback(res) {
           var jsonResponse = JSON.parse(res.responseText);
@@ -89,8 +89,8 @@ $(function() {
             var face;
 
             for (var i = 0; i < faces.length; i++) {
-              context.lineWidth = "6";
-              context.strokeStyle = "red";
+              context.lineWidth = '6';
+              context.strokeStyle = 'red';
               face = faces[i];
               context.rect(face.topLeftX, face.topLeftY, face.width, face.height);
               context.stroke();

@@ -80,15 +80,15 @@ Kairos.prototype.detect = function(image_data, callback, options) {
   }
 
 	var header_settings = {
-		"Content-type"    : "application/json",
-        "app_id"          : this.app_id,
-        "app_key"         : this.app_key
+		'Content-type'    : 'application/json',
+        'app_id'          : this.app_id,
+        'app_key'         : this.app_key
       };
 
   	jQuery.ajax(url, {
         headers  : header_settings,
-        type     : "POST",
-        dataType : "raw",
+        type     : 'POST',
+        dataType : 'raw',
         data     : JSON.stringify(data),
         success  : callback,
         error    : callback
@@ -145,15 +145,15 @@ Kairos.prototype.enroll = function(image_data, gallery_id, subject_id, callback,
   }
 
   var header_settings = {
-    "Content-type"    : "application/json",
-        "app_id"          : this.app_id,
-        "app_key"         : this.app_key
+    'Content-type'    : 'application/json',
+        'app_id'          : this.app_id,
+        'app_key'         : this.app_key
       };
 
     jQuery.ajax(url, {
         headers  : header_settings,
-        type     : "POST",
-        dataType : "raw",
+        type     : 'POST',
+        dataType : 'raw',
         data     : JSON.stringify(data),
         success  : callback,
         error    : callback
@@ -199,15 +199,15 @@ Kairos.prototype.recognize = function(image_data, gallery_id, callback, options)
   }
 
   var header_settings = {
-    "Content-type"    : "application/json",
-        "app_id"          : this.app_id,
-        "app_key"         : this.app_key
+    'Content-type'    : 'application/json',
+        'app_id'          : this.app_id,
+        'app_key'         : this.app_key
       };
 
     jQuery.ajax(url, {
         headers  : header_settings,
-        type     : "POST",
-        dataType : "raw",
+        type     : 'POST',
+        dataType : 'raw',
         data     : JSON.stringify(data),
         success  : callback,
         error    : callback
@@ -247,15 +247,15 @@ Kairos.prototype.viewGalleries = function(callback, options) {
   }
 
   var header_settings = {
-    "Content-type"    : "application/json",
-        "app_id"          : this.app_id,
-        "app_key"         : this.app_key
+    'Content-type'    : 'application/json',
+        'app_id'          : this.app_id,
+        'app_key'         : this.app_key
       };
 
     jQuery.ajax(url, {
         headers  : header_settings,
-        type     : "POST",
-        dataType : "raw",
+        type     : 'POST',
+        dataType : 'raw',
         data     : JSON.stringify(data),
         success  : callback,
         error    : callback
@@ -301,15 +301,15 @@ Kairos.prototype.viewSubjectsInGallery = function(gallery_id, callback, options)
   }
 
   var header_settings = {
-    "Content-type"    : "application/json",
-        "app_id"          : this.app_id,
-        "app_key"         : this.app_key
+    'Content-type'    : 'application/json',
+        'app_id'          : this.app_id,
+        'app_key'         : this.app_key
       };
 
     jQuery.ajax(url, {
         headers  : header_settings,
-        type     : "POST",
-        dataType : "raw",
+        type     : 'POST',
+        dataType : 'raw',
         data     : JSON.stringify(data),
         success  : callback,
         error    : callback
@@ -351,15 +351,15 @@ Kairos.prototype.removeGallery = function(gallery_id, callback, options) {
   }
 
   var header_settings = {
-    "Content-type"    : "application/json",
-        "app_id"          : this.app_id,
-        "app_key"         : this.app_key
+    'Content-type'    : 'application/json',
+        'app_id'          : this.app_id,
+        'app_key'         : this.app_key
       };
 
     jQuery.ajax(url, {
         headers  : header_settings,
-        type     : "POST",
-        dataType : "raw",
+        type     : 'POST',
+        dataType : 'raw',
         data     : JSON.stringify(data),
         success  : callback,
         error    : callback
@@ -404,15 +404,15 @@ Kairos.prototype.removeSubjectFromGallery = function(subject_id, gallery_id, cal
   }
 
   var header_settings = {
-    "Content-type"    : "application/json",
-        "app_id"          : this.app_id,
-        "app_key"         : this.app_key
+    'Content-type'    : 'application/json',
+        'app_id'          : this.app_id,
+        'app_key'         : this.app_key
       };
 
     jQuery.ajax(url, {
         headers  : header_settings,
-        type     : "POST",
-        dataType : "raw",
+        type     : 'POST',
+        dataType : 'raw',
         data     : JSON.stringify(data),
         success  : callback,
         error    : callback
@@ -466,15 +466,15 @@ Kairos.prototype.verify = function(image, gallery_id, subject_id, callback, opti
   }
 
   var header_settings = {
-    "Content-type"    : "application/json",
-        "app_id"          : this.app_id,
-        "app_key"         : this.app_key
+    'Content-type'    : 'application/json',
+        'app_id'          : this.app_id,
+        'app_key'         : this.app_key
       };
 
     jQuery.ajax(url, {
         headers  : header_settings,
-        type     : "POST",
-        dataType : "raw",
+        type     : 'POST',
+        dataType : 'raw',
         data     : JSON.stringify(data),
         success  : callback,
         error    : callback
@@ -507,15 +507,15 @@ Kairos.prototype.checkAuthentication = function(callback, options) {
   }
 
   var header_settings = {
-    "Content-type"    : "application/json",
-        "app_id"          : this.app_id,
-        "app_key"         : this.app_key
+    'Content-type'    : 'application/json',
+        'app_id'          : this.app_id,
+        'app_key'         : this.app_key
       };
 
     jQuery.ajax(url, {
         headers  : header_settings,
-        type     : "POST",
-        dataType : "raw",
+        type     : 'POST',
+        dataType : 'raw',
         data     : JSON.stringify(data),
         success  : callback,
         error    : callback
