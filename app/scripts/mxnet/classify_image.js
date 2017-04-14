@@ -112,7 +112,7 @@ $.ajax({
        return xhr;
      },
      type: 'GET',
-     url: "./model/fastpoor.json",
+     url: "./fastpoor.json",
       dataType: 'json',
      success: function(model){
      resetProgress();
