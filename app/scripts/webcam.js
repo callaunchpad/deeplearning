@@ -56,22 +56,23 @@ $(function() {
       // Format image
       img = canvas.toDataURL('image/png');
 
+      var image_data = String(img);
+      // Dealing with Javascript Format of Image Strings
+      image_data = image_data.replace('data:image/jpeg;base64,', '');
+      image_data = image_data.replace('data:image/jpg;base64,', '');
+      image_data = image_data.replace('data:image/png;base64,', '');
+      image_data = image_data.replace('data:image/gif;base64,', '');
+      image_data = image_data.replace('data:image/bmp;base64,', '');
+
       // Hide video
       $('video').css('display', 'none');
       $('canvas').css('display', 'block');
 
       // Face Recognition
-      if (mode == 'f1') {
+      if (mode == 'face') {
         // Change action button text
         $('#action-button').text('Reset');
 
-        var image_data = String(img);
-        // Dealing with Javascript Format of Image Strings
-        image_data = image_data.replace('data:image/jpeg;base64,', '');
-        image_data = image_data.replace('data:image/jpg;base64,', '');
-        image_data = image_data.replace('data:image/png;base64,', '');
-        image_data = image_data.replace('data:image/gif;base64,', '');
-        image_data = image_data.replace('data:image/bmp;base64,', '');
         var options = {'selector': 'FULL'};
 
         function kairosCallback(res) {
@@ -124,6 +125,93 @@ $(function() {
         }
 
         kairos.detect(image_data, kairosCallback, options);
+      } 
+
+      // Product Hunter
+      else if (mode == 'product') {
+        // Change action button text
+        $('#action-button').text('Reset');
+
+        var header_settings = {
+          'Content-type'     : 'application/json',
+          'Authorization'    : 'CloudSight BLIk1IjVLNIVSr7bIAUxOw'
+        };
+        var data = { 
+          'remote_image_url'  : 'https://images-na.ssl-images-amazon.com/images/I/61xMPiowKhL._SY355_.jpg',
+          'locale' : 'en-US'
+        };
+
+        // TODO: Why is it going to error when it's succeeding?
+        // TODO: Poll every 1 second after successful response from POST request.
+        // TOOD: Update dialog when product name has been discovered.
+        jQuery.ajax('http://api.cloudsight.ai/image_requests', {
+          headers  : header_settings,
+          type     : 'POST',
+          dataType : 'raw',
+          data     : JSON.stringify(data),
+          success  : function(res) {
+            var jsonResponse = JSON.parse(res.responseText);
+            console.log(jsonResponse);
+
+            setTimeout(function() {
+              var header_settings = {
+                'token': jsonResponse.token,
+                'Authorization': 'CloudSight BLIk1IjVLNIVSr7bIAUxOw'
+              };
+
+              jQuery.ajax('http://api.cloudsight.ai/image_responses/' + jsonResponse.token, {
+                headers : header_settings,
+                type: 'GET',
+                data: {},
+                success: function(res) {
+                  console.log(res);
+
+                  // Hide overlay
+                  $('.overlay').css('display', 'none');
+                },
+                error: function(res) {
+                  console.log(res);
+
+                  // Hide overlay
+                  $('.overlay').css('display', 'none');
+                }
+              });
+            }, 6000);
+          },
+          error    : function(res) {
+            $('#speech').text('Internal server error.');
+
+            var jsonResponse = JSON.parse(res.responseText);
+            console.log(jsonResponse);
+
+            setTimeout(function() {
+              var header_settings = {
+                'token': jsonResponse.token,
+                'Authorization': 'CloudSight BLIk1IjVLNIVSr7bIAUxOw'
+              };
+
+              jQuery.ajax('http://api.cloudsight.ai/image_responses/' + jsonResponse.token, {
+                headers : header_settings,
+                type: 'GET',
+                data: {},
+                success: function(res) {
+                  console.log(res);
+
+                  // Hide overlay
+                  $('.overlay').css('display', 'none');
+                },
+                error: function(res) {
+                  console.log(res);
+
+                  // Hide overlay
+                  $('.overlay').css('display', 'none');
+                }
+              });
+            }, 6000);
+          }
+        });
+
+        status = 'result';
       }
 
 
@@ -133,7 +221,7 @@ $(function() {
       status = 'live';
 
       // Change action button text
-      $('#action-button').text('Snap!');
+      $('#action-button').text('Snap');
 
       // Show video
       $('video').css('display', 'block');
@@ -148,7 +236,7 @@ $(function() {
 
 
 /*** HANDLE SWITCHING BETWEEN MODES ***/
-var mode = 'f1';
+var mode = 'face';
 var changeMode = function(nextMode) {
   mode = nextMode;
 }
