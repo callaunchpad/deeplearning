@@ -1,4 +1,2 @@
-# Deep Learning at Launchpad
-
+# deeplearning
 Live demos of deep learning models trained by the Launchpad team.
-- [IN PROGRESS] Real-time Object Detection using Faster R-CNN

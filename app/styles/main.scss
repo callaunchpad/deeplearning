@@ -1,0 +1,168 @@
+// bower:scss
+// endbower
+
+@import 'bower_components/materialize/sass/materialize';
+
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+body {
+  background: #fafafa;
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  color: #333;
+  padding-bottom: 2em;
+}
+
+// INTRODUCTION
+#intro {
+  text-align: center;
+
+  h1 {
+    font-weight: 900;
+    margin-bottom: 0;
+  }
+
+  h2 {
+    margin-top: 0;
+    font-weight: 300;
+    margin-bottom: 0.2em;
+  }
+
+  p {
+    margin-top: 0;
+    font-size: 1.4rem;
+  }
+
+  @media #{$small-and-down} {
+    h1 {
+      font-size: 2.8rem;
+    }
+
+    h2 {
+      font-size: 2.4rem;
+    }
+  }
+}
+
+// NAVIGATION
+nav {
+  text-align: center;
+
+  img {
+    padding-top: 16px;
+    height: 48px;
+  }
+
+  @media #{$small-and-down} {
+    img {
+      padding-top: 14px;
+      height: 42px;
+    }
+  }
+}
+
+// ABOUT
+#about {
+  h3 {
+    font-weight: 700;
+    font-size: 2.4rem;
+    color: color('grey', 'darken-2');
+    letter-spacing: -0.03rem;
+  }
+
+  p {
+    margin-top: 0;
+    font-size: 1.4rem;
+    font-weight: 300;
+  }
+}
+
+// VIDEO
+#demo {
+  position: relative;
+  text-align: center;
+  background-color: #111;
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 10px;
+
+  #api-features {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: white;
+    padding: 1em;
+    border-radius: 4px;
+    z-index: 2;
+
+    p {
+      margin-top: 6px;
+      margin-bottom: 6px;
+    }
+  }
+
+  canvas, 
+  video {
+    display: inline-block;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+   #action-button {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 900;
+    font-size: 2rem;
+   }
+
+   canvas {
+    display: none;
+   }
+}
+
+@media #{$small-and-down} {
+  #demo {
+    text-align: center;
+    background-color: #111;
+    height: auto;
+    width: 100%;
+
+    video {
+      display: inline-block;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    canvas {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+  }
+}
+
+.overlay {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.4;
+  z-index: 9999;
+
+  p {
+    z-index: 999999;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 900;
+    font-size: 2rem;
+  }
+}
