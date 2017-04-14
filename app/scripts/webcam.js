@@ -61,7 +61,7 @@ $(function() {
       $('canvas').css('display', 'block');
 
       // Face Recognition
-      if (mode == 'f1') {
+      if (mode == 'face') {
         // Change action button text
         $('#action-button').text('Reset');
 
@@ -77,7 +77,6 @@ $(function() {
         function kairosCallback(res) {
           var jsonResponse = JSON.parse(res.responseText);
 
-          console.log(jsonResponse);
           if (!!jsonResponse.images) {
             var faces = jsonResponse.images[0].faces;
             var face;
@@ -133,7 +132,7 @@ $(function() {
       status = 'live';
 
       // Change action button text
-      $('#action-button').text('Snap!');
+      $('#action-button').text('Snap');
 
       // Show video
       $('video').css('display', 'block');
@@ -148,7 +147,7 @@ $(function() {
 
 
 /*** HANDLE SWITCHING BETWEEN MODES ***/
-var mode = 'f1';
+var mode = 'face';
 var changeMode = function(nextMode) {
   mode = nextMode;
 }
