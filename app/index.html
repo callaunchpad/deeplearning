@@ -63,33 +63,31 @@
       <div class="row">
         <h1 class="blue-text text-darken-1">Project Sherlock</h1>
         <h2 class="grey-text-darken-4">Deep Vision with MXNet</h2>
-        <p>[IN PROGRESS] Live demos of deep neural networks trained for computer vision tasks.</p>
+        <p>Live deep neural networks trained for computer vision tasks.</p>
       </div>
     </div>
 
-    <div id="demo">
-      <form id="api-features" class="z-depth-3">
-        <p>
-          <input name="features" type="radio" id="f1" onclick="changeMode('f1')" checked />
-          <label for="f1">Object Detection (Single)</label>
-        </p>
-        <p>
-          <input name="features" type="radio" id="f2" onclick="changeMode('f2')" />
-          <label for="f2">Object Detection (Real-time)</label>
-        </p>
-        <p>
-          <input name="features" type="radio" id="f3" onclick="changeMode('f3')" />
-          <label for="f3">Face Recognition</label>
-        </p>
-      </form>
+    <div class="container">
+      <div id="demo" class="z-depth-5">
+        <form id="api-features" class="z-depth-3">
+          <p>
+            <input name="features" type="radio" id="f1" onclick="changeMode('f1')" checked />
+            <label for="f1">Object Recognition</label>
+          </p>
+          <p>
+            <input name="features" type="radio" id="f2" onclick="changeMode('f2')" />
+            <label for="f2">Face Recognition</label>
+          </p>
+        </form>
 
-      <video></video>
-      <canvas></canvas>
+        <video></video>
+        <canvas></canvas>
 
-      <a id="action-button" class="waves-effect waves-light btn-large blue">Snap!</a>
-      
-      <div class="overlay">
-        <p class="white-text">Processing...</p>
+        <a id="action-button" class="waves-effect waves-light btn-large blue">Snap!</a>
+        
+        <div class="overlay">
+          <p class="white-text">Processing...</p>
+        </div>
       </div>
     </div>
     
@@ -114,12 +112,11 @@
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/bower_components/modernizr/modernizr.js"></script>
     <script src="/bower_components/materialize/bin/materialize.js"></script>
-    <script src="/bower_components/aws-sdk/dist/aws-sdk.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     
     <!-- build:js scripts/main.js -->
-    <script src="/bower_components/assets/kairos.js"></script>
+    <script src="scripts/kairos.js"></script>
     <script src="scripts/webcam.js"></script>
     <!-- endbuild -->
   </body>
