@@ -89,6 +89,32 @@ $(function() {
               context.rect(face.topLeftX, face.topLeftY, face.width, face.height);
               context.stroke();
             }
+
+            var raceProbs = {
+              'asian': faces[0]['attributes']['asian'],
+              'black': faces[0]['attributes']['black'],
+              'hispanic': faces[0]['attributes']['hispanic'],
+              'other': faces[0]['attributes']['other'],
+              'white': faces[0]['attributes']['white']
+            }
+            var bestRaceProb = 0.0;
+            var bestRace = 'asian';
+            for(var race in raceProbs) {
+              if(raceProbs.hasOwnProperty(race) && raceProbs[race] >= bestRaceProb) {
+                bestRaceProb = raceProbs[race];
+                bestRace = race;
+              }
+            }
+            bestRaceProb = bestRaceProb.toFixed(3);
+
+            var gender = 'guy';
+            if (faces[0]['attributes']['gender']['type'] == 'F') {
+              gender = 'girl';
+            }
+
+            $('#speech').text('You look ' + (bestRaceProb * 100) + '% like a ' + faces[0]['attributes']['age'] + '-year-old ' + bestRace + ' ' + gender +'.');
+          } else {
+            $('#speech').text('Sorry, I can\'t see where your face is.');
           }
 
           status = 'result';
@@ -114,6 +140,8 @@ $(function() {
 
       // Hide canvas
       $('canvas').css('display', 'none');
+
+      $('#speech').text("Send me a snap!");
     }
   });
 });

@@ -166,3 +166,22 @@ nav {
     font-size: 2rem;
   }
 }
+
+// INFO
+#info {
+  text-align: center;
+
+  div {
+    display: inline-block;
+    padding: 1em;
+    margin-bottom: 2em;
+
+    p {
+      font-size: 1.8rem;
+      font-weight: 700;
+
+      margin: 0;
+      color: white;
+    }
+  }
+}
