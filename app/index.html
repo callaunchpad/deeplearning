@@ -1,0 +1,126 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sherlock: Deep Vision</title>
+    <meta name='subject' content='Software' />
+    <meta name='description' content='We are a group of UC Berkeley students that use machine learning, AI, and data science techniques to solve problems by building intelligent software.' />
+    <meta name='keywords' content='intelligent, software, machine learning, artificial intelligence, data science, Berkeley, Cal, Sherlock, Whisper, Lively, Launchpad' />
+    <meta name='url' content='http://callaunchpad.org' />
+    <meta name='reply-to' content='team@callaunchpad.org' />
+    <meta name='copyright' content='Launchpad'>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png?v=2">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png?v=2">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-icon-72x72.png?v=2">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-icon-76x76.png?v=2">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-icon-114x114.png?v=2">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-icon-120x120.png?v=2">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-icon-144x144.png?v=2">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-icon-152x152.png?v=2">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-icon-180x180.png?v=2">
+    <link rel="icon" type="image/png" sizes="192x192"  href="images/favicon/android-icon-192x192.png?v=2">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png?v=2">
+    <link rel="manifest" href="images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png?v=2">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900" rel="stylesheet">
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/materialize/bin/materialize.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="/bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+  </head>
+  <body>
+    <!--[if IE]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <nav class="grey darken-4">
+      <div class="nav-wrapper">
+        <a href="https://callaunchpad.org" target="_blank">
+          <img src="images/logo_white.png" class="center">
+        </a>
+      </div>
+    </nav>
+
+    <div id="intro" class="container">
+      <div class="row">
+        <h1 class="blue-text text-darken-1">Project Sherlock</h1>
+        <h2 class="grey-text-darken-4">Deep Vision with MXNet</h2>
+        <p>[IN PROGRESS] Live demos of deep neural networks trained for computer vision tasks.</p>
+      </div>
+    </div>
+
+    <div id="demo">
+      <form id="api-features" class="z-depth-3">
+        <p>
+          <input name="features" type="radio" id="f1" onclick="changeMode('f1')" checked />
+          <label for="f1">Object Detection (Single)</label>
+        </p>
+        <p>
+          <input name="features" type="radio" id="f2" onclick="changeMode('f2')" />
+          <label for="f2">Object Detection (Real-time)</label>
+        </p>
+        <p>
+          <input name="features" type="radio" id="f3" onclick="changeMode('f3')" />
+          <label for="f3">Face Recognition</label>
+        </p>
+      </form>
+
+      <video></video>
+      <canvas></canvas>
+
+      <a id="action-button" class="waves-effect waves-light btn-large blue">Snap!</a>
+      
+      <div class="overlay">
+        <p class="white-text">Processing...</p>
+      </div>
+    </div>
+    
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-87991710-2');ga('send','pageview');
+    </script>
+
+    <script>
+      if (location.protocol != 'https:' && !location.href.includes('localhost')) {
+        location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+      }
+    </script>
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/modernizr/modernizr.js"></script>
+    <script src="/bower_components/materialize/bin/materialize.js"></script>
+    <script src="/bower_components/aws-sdk/dist/aws-sdk.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    
+    <!-- build:js scripts/main.js -->
+    <script src="/bower_components/assets/kairos.js"></script>
+    <script src="scripts/webcam.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>
