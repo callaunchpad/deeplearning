@@ -14,24 +14,10 @@ body {
   background: #fafafa;
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
   color: #333;
+  padding-bottom: 2em;
 }
 
-nav {
-  text-align: center;
-
-  img {
-    padding-top: 16px;
-    height: 48px;
-  }
-
-  @media #{$small-and-down} {
-    img {
-      padding-top: 14px;
-      height: 42px;
-    }
-  }
-}
-
+// INTRODUCTION
 #intro {
   text-align: center;
 
@@ -48,14 +34,44 @@ nav {
   p {
     font-size: 1.4rem;
   }
+
+  @media #{$small-and-down} {
+    h1 {
+      font-size: 2.8rem;
+    }
+
+    h2 {
+      font-size: 2.4rem;
+    }
+  }
 }
 
+// NAVIGATION
+nav {
+  text-align: center;
+
+  img {
+    padding-top: 16px;
+    height: 48px;
+  }
+
+  @media #{$small-and-down} {
+    img {
+      padding-top: 14px;
+      height: 42px;
+    }
+  }
+}
+
+
+// VIDEO
 #demo {
   position: relative;
   text-align: center;
   background-color: #111;
-  height: 100vh;
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 10px;
 
   #api-features {
     position: absolute;
@@ -75,7 +91,6 @@ nav {
   canvas, 
   video {
     display: inline-block;
-    min-height: 100vh;
     max-width: 100%;
     margin: 0 auto;
   }

@@ -5,6 +5,8 @@ $(function() {
   var width = 0;
   var height = 0;
 
+  var kairos = new Kairos('f51c3249', 'd6814b899b064fb58df942943afa3cb2');
+
   /*** BEGIN WEBCAM ***/
   navigator.getMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
 
@@ -22,10 +24,10 @@ $(function() {
   });
 
   /*** GET WIDTH AND HEIGHT ***/
-  video.addEventListener('canplay', function(ev){
+  video.addEventListener('canplay', function(ev) {
     if (!streaming) {
-      width = $('video').width();
-      height = $('video').height();
+      width = video.videoWidth;
+      height = video.videoHeight;
 
       video.setAttribute('width', width);
       video.setAttribute('height', height);
@@ -60,34 +62,53 @@ $(function() {
 
 
 
-      /* TODO: Make HTTP request */
       // Object Detection (Single)
       if (mode == 'f1') {
 
       }
 
-      // Object Detection (Real-time)
-      else if (mode == 'f2') {
-
-      }
-
       // Face Recognition
-      else {
-
-      }
-
-
-
-      // Simluate HTTP request
-      setTimeout(function() {
-        status = 'result';
-
-        // Hide overlay
-        $('.overlay').css('display', 'none');
-
+      else if (mode == 'f2') {
         // Change action button text
         $('#action-button').text('Reset');
-      }, 2000);
+
+        var image_data = String(img);
+        // Dealing with Javascript Format of Image Strings
+        image_data = image_data.replace('data:image/jpeg;base64,', '');
+        image_data = image_data.replace('data:image/jpg;base64,', '');
+        image_data = image_data.replace('data:image/png;base64,', '');
+        image_data = image_data.replace('data:image/gif;base64,', '');
+        image_data = image_data.replace('data:image/bmp;base64,', '');
+        var options = {'selector': 'FULL'};
+
+        function kairosCallback(res) {
+          var jsonResponse = JSON.parse(res.responseText);
+
+          console.log(jsonResponse);
+          if (!!jsonResponse.images) {
+            var faces = jsonResponse.images[0].faces;
+            var face;
+
+            for (var i = 0; i < faces.length; i++) {
+              context.lineWidth = '6';
+              context.strokeStyle = 'red';
+              face = faces[i];
+              context.rect(face.topLeftX, face.topLeftY, face.width, face.height);
+              context.stroke();
+            }
+          }
+
+          status = 'result';
+
+          // Hide overlay
+          $('.overlay').css('display', 'none');
+        }
+
+        kairos.detect(image_data, kairosCallback, options);
+      }
+
+
+
     /*** ON LIVE, GET IMG ***/
     } else if (status == 'result') {
       status = 'live';
@@ -102,9 +123,8 @@ $(function() {
       $('canvas').css('display', 'none');
     }
   });
-
-
 });
+
 
 /*** HANDLE SWITCHING BETWEEN MODES ***/
 var mode = 'f1';
