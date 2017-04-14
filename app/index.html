@@ -102,7 +102,7 @@
     </script>
 
     <script>
-      if (location.protocol != 'https:' && !location.href.includes('localhost')) {
+      if (location.protocol != 'https:' && !location.href.includes('localhost') && !location.href.includes('file://')) {
         location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
       }
     </script>

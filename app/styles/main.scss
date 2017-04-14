@@ -109,11 +109,6 @@ nav {
    }
 }
 
-@media #{$large-and-up} {
-  #demo {
-  }  
-}
-
 @media #{$small-and-down} {
   #demo {
     text-align: center;
