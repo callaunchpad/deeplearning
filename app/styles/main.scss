@@ -70,7 +70,7 @@ nav {
   h3 {
     font-weight: 700;
     font-size: 2.4rem;
-    color: color('grey', 'darken-2');
+    color: color('grey', 'darken-4');
     letter-spacing: -0.03rem;
   }
 
@@ -190,9 +190,11 @@ nav {
   text-align: center;
 
   div {
+    position: relative;
     display: inline-block;
     padding: 1em;
     margin-bottom: 2em;
+    border-radius: 6px;
 
     p {
       font-size: 1.8rem;
@@ -201,5 +203,16 @@ nav {
       margin: 0;
       color: white;
     }
+  }
+
+  div:before {
+     content:"";
+     position: absolute;
+     bottom: -15px;
+     right: 20px;
+     border-top: 0px solid transparent;
+     border-right: 20px solid color('grey', 'darken-4');
+     border-bottom: 20px solid transparent;
+     margin: 13px 0 0 -25px;
   }
 }

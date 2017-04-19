@@ -78,7 +78,6 @@ $(function() {
         function kairosCallback(res) {
           var jsonResponse = JSON.parse(res.responseText);
 
-          console.log(jsonResponse);
           if (!!jsonResponse.images) {
             var faces = jsonResponse.images[0].faces;
             var face;
@@ -108,9 +107,9 @@ $(function() {
             }
             bestRaceProb = bestRaceProb.toFixed(3);
 
-            var gender = 'guy';
-            if (faces[0]['attributes']['gender']['type'] == 'F') {
-              gender = 'girl';
+            var gender = 'girl';
+            if (faces[0]['attributes']['gender']['type'] == 'M') {
+              gender = 'guy';
             }
 
             $('#speech').text('You look ' + (bestRaceProb * 100) + '% like a ' + faces[0]['attributes']['age'] + '-year-old ' + bestRace + ' ' + gender +'.');
@@ -238,5 +237,22 @@ $(function() {
 /*** HANDLE SWITCHING BETWEEN MODES ***/
 var mode = 'face';
 var changeMode = function(nextMode) {
+  $('#action-button').text('Snap');
+  $('video').css('display', 'block');
+  $('canvas').css('display', 'none');
+
+  // Close glasses feature
+  if (mode == 'glasses' && nextMode !== 'glasses') {
+    $('#action-button').css('opacity', 1);
+    $('#speech').text('Send me a snap!');
+  }
+
+  // Open glasses feature
+  if (mode !== 'glasses' && nextMode == 'glasses') {
+    $('#action-button').css('opacity', 0);
+    startGlassesDemo();
+    $('#speech').text('Let\'s see how you look in glasses.');
+  }
+
   mode = nextMode;
 }
