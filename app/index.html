@@ -94,10 +94,15 @@
             <input name="features" type="radio" id="face" onclick="changeMode('face')" checked />
             <label for="face">Face Recognition</label>
           </p>
+          <p class="hide-on-med-and-down">
+            <input name="features" type="radio" id="glasses" onclick="changeMode('glasses')" />
+            <label for="glasses">Glasses</label>
+          </p>
         </form>
 
         <video></video>
         <canvas></canvas>
+        <img class="glasses" src="images/glasses.png" style="position: absolute; display: block; opacity: 0; top: 0; left: 0">
 
         <a id="action-button" class="waves-effect waves-light btn blue">Snap</a>
 
@@ -131,6 +136,12 @@
     <!-- endbuild -->
 
     <!-- build:js scripts/main.js -->
+    <script src="scripts/glasses/compatibility.js"></script>
+    <script src="scripts/glasses/smoother.js"></script>
+    <script src="scripts/glasses/objectdetect.js"></script>
+    <script src="scripts/glasses/objectdetect.frontalface_alt.js"></script>
+    <script src="scripts/glasses/startdemo.js"></script>
+
     <script src="scripts/kairos.js"></script>
     <script src="scripts/webcam.js"></script>
     <!-- endbuild -->
