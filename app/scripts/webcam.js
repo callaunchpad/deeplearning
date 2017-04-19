@@ -149,17 +149,21 @@ $(function() {
 /*** HANDLE SWITCHING BETWEEN MODES ***/
 var mode = 'face';
 var changeMode = function(nextMode) {
+  $('#action-button').text('Snap');
+  $('video').css('display', 'block');
+  $('canvas').css('display', 'none');
+
   // Close glasses feature
   if (mode == 'glasses' && nextMode !== 'glasses') {
     $('#action-button').css('opacity', 1);
-    $('#speech').text("Send me a snap!");
+    $('#speech').text('Send me a snap!');
   }
 
   // Open glasses feature
   if (mode !== 'glasses' && nextMode == 'glasses') {
     $('#action-button').css('opacity', 0);
     startGlassesDemo();
-    $('#speech').text("Let's see how you look in glasses.");
+    $('#speech').text('Let\'s see how you look in glasses.');
   }
 
   mode = nextMode;

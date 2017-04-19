@@ -5,7 +5,7 @@
  * Copyright (c) 2012, Martin Tschirsich
  */
 var objectdetect = (function() {
-	"use strict";
+	'use strict';
     	
     var /**
 		 * Converts from a 4-channel RGBA source image to a 1-channel grayscale

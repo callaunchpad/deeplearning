@@ -11,7 +11,7 @@
  */
 
 var Smoother = function(alphas, initialValues, lookAhead) {
-	"use strict";
+	'use strict';
 	
 	var lastUpdate = +new Date(),
 		initialAlphas = alphas.slice(0),
