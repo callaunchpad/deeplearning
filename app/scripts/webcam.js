@@ -56,13 +56,6 @@ $(function() {
       // Format image
       img = canvas.toDataURL('image/png');
 
-      var image_data = String(img);
-      // Dealing with Javascript Format of Image Strings
-      image_data = image_data.replace('data:image/jpeg;base64,', '');
-      image_data = image_data.replace('data:image/jpg;base64,', '');
-      image_data = image_data.replace('data:image/png;base64,', '');
-      image_data = image_data.replace('data:image/gif;base64,', '');
-      image_data = image_data.replace('data:image/bmp;base64,', '');
 
       // Hide video
       $('video').css('display', 'none');
@@ -70,6 +63,15 @@ $(function() {
 
       // Face Recognition
       if (mode == 'face') {
+        var image_data = String(img);
+        
+        // Dealing with Javascript Format of Image Strings
+        image_data = image_data.replace('data:image/jpeg;base64,', '');
+        image_data = image_data.replace('data:image/jpg;base64,', '');
+        image_data = image_data.replace('data:image/png;base64,', '');
+        image_data = image_data.replace('data:image/gif;base64,', '');
+        image_data = image_data.replace('data:image/bmp;base64,', '');
+        
         // Change action button text
         $('#action-button').text('Reset');
 
