@@ -138,23 +138,27 @@ $(function() {
           'Authorization'    : 'CloudSight BLIk1IjVLNIVSr7bIAUxOw'
         };
         var data = { 
-          'remote_image_url'  : 'https://images-na.ssl-images-amazon.com/images/I/61xMPiowKhL._SY355_.jpg',
+          'remote_image_url'  : 'https://www.mockupworld.co/wp-content/uploads/edd/2015/08/free-applewatch-mockup-psd-1000x683.jpg',
           'locale' : 'en-US'
         };
 
-        // TODO: Why is it going to error when it's succeeding?
-        // TODO: Poll every 1 second after successful response from POST request.
-        // TOOD: Update dialog when product name has been discovered.
         jQuery.ajax('http://api.cloudsight.ai/image_requests', {
           headers  : header_settings,
           type     : 'POST',
-          dataType : 'raw',
+          dataType : 'json',
           data     : JSON.stringify(data),
           success  : function(res) {
-            var jsonResponse = JSON.parse(res.responseText);
-            console.log(jsonResponse);
+            var jsonResponse = res;
 
-            setTimeout(function() {
+            var attempts = 0;
+            var t = setInterval(function() {
+              if (attempts++ >= 40) {
+                $('#speech').text("Sorry, response didn't come in time.");
+                $('.overlay').css('display', 'none');
+                clearInterval(t);
+                return;
+              }
+
               var header_settings = {
                 'token': jsonResponse.token,
                 'Authorization': 'CloudSight BLIk1IjVLNIVSr7bIAUxOw'
@@ -163,52 +167,25 @@ $(function() {
               jQuery.ajax('http://api.cloudsight.ai/image_responses/' + jsonResponse.token, {
                 headers : header_settings,
                 type: 'GET',
+                dataType: 'json',
                 data: {},
                 success: function(res) {
-                  console.log(res);
-
-                  // Hide overlay
-                  $('.overlay').css('display', 'none');
+                  if (res.status == 'completed') {
+                    $('#speech').text("I see a " + res.name + ".");
+                    $('.overlay').css('display', 'none');
+                    clearInterval(t);
+                  }
                 },
                 error: function(res) {
-                  console.log(res);
-
-                  // Hide overlay
+                  $('#speech').text("Sorry, internal server error.");
                   $('.overlay').css('display', 'none');
+                  clearInterval(t);
                 }
               });
-            }, 6000);
+            }, 1000);
           },
           error    : function(res) {
-            $('#speech').text('Internal server error.');
-
-            var jsonResponse = JSON.parse(res.responseText);
-            console.log(jsonResponse);
-
-            setTimeout(function() {
-              var header_settings = {
-                'token': jsonResponse.token,
-                'Authorization': 'CloudSight BLIk1IjVLNIVSr7bIAUxOw'
-              };
-
-              jQuery.ajax('http://api.cloudsight.ai/image_responses/' + jsonResponse.token, {
-                headers : header_settings,
-                type: 'GET',
-                data: {},
-                success: function(res) {
-                  console.log(res);
-
-                  // Hide overlay
-                  $('.overlay').css('display', 'none');
-                },
-                error: function(res) {
-                  console.log(res);
-
-                  // Hide overlay
-                  $('.overlay').css('display', 'none');
-                }
-              });
-            }, 6000);
+            $('#speech').text("Sorry, internal server error.");
           }
         });
 
