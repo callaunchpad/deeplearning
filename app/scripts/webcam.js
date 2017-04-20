@@ -56,13 +56,6 @@ $(function() {
       // Format image
       img = canvas.toDataURL('image/png');
 
-      var image_data = String(img);
-      // Dealing with Javascript Format of Image Strings
-      image_data = image_data.replace('data:image/jpeg;base64,', '');
-      image_data = image_data.replace('data:image/jpg;base64,', '');
-      image_data = image_data.replace('data:image/png;base64,', '');
-      image_data = image_data.replace('data:image/gif;base64,', '');
-      image_data = image_data.replace('data:image/bmp;base64,', '');
 
       // Hide video
       $('video').css('display', 'none');
@@ -70,6 +63,14 @@ $(function() {
 
       // Face Recognition
       if (mode == 'face') {
+        var image_data = String(img);
+      // Dealing with Javascript Format of Image Strings
+        image_data = image_data.replace('data:image/jpeg;base64,', '');
+        image_data = image_data.replace('data:image/jpg;base64,', '');
+        image_data = image_data.replace('data:image/png;base64,', '');
+        image_data = image_data.replace('data:image/gif;base64,', '');
+        image_data = image_data.replace('data:image/bmp;base64,', '');
+
         // Change action button text
         $('#action-button').text('Reset');
 
@@ -124,7 +125,7 @@ $(function() {
         }
 
         kairos.detect(image_data, kairosCallback, options);
-      } 
+      }
 
       // Product Hunter
       else if (mode == 'product') {
@@ -135,19 +136,22 @@ $(function() {
           'Content-type'     : 'application/json',
           'Authorization'    : 'CloudSight BLIk1IjVLNIVSr7bIAUxOw'
         };
-        var data = { 
-          'remote_image_url'  : 'https://images-na.ssl-images-amazon.com/images/I/61xMPiowKhL._SY355_.jpg',
-          'locale' : 'en-US'
-        };
+        if (canvas.toBlob) {
+          console.log("hii");
+          canvas.toBlob(
+            function (blob) {
+              // Do something with the blob object,
+              // e.g. creating a multipart form for file uploads:
+              var formData = new FormData();
+              formData.append('image_request[image]', blob);
+              console.log(blob);
 
-        // TODO: Why is it going to error when it's succeeding?
-        // TODO: Poll every 1 second after successful response from POST request.
-        // TOOD: Update dialog when product name has been discovered.
         jQuery.ajax('http://api.cloudsight.ai/image_requests', {
           headers  : header_settings,
           type     : 'POST',
-          dataType : 'raw',
-          data     : JSON.stringify(data),
+          dataType : 'json',
+          processData: false,
+          data     : formData,
           success  : function(res) {
             var jsonResponse = JSON.parse(res.responseText);
             console.log(jsonResponse);
@@ -209,6 +213,13 @@ $(function() {
             }, 6000);
           }
         });
+
+              /* ... */
+            },
+            'image/jpeg'
+          );
+        }
+
 
         status = 'result';
       }
