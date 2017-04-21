@@ -150,15 +150,12 @@ $(function() {
 
 
          $(function() {
-          //image_data = image_data.replace('data:image/png;base64,', '');
-        // Dealing with Javascript Format of Image Strings
-            //console.log(test);
+            //var test = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
             var dataURL = canvas.toDataURL('image/jpeg', 0.5);
             var blob = dataURItoBlob(dataURL);
-            console.log(blob);
-            var fd = new FormData(document.forms[0]);
-            fd.append("image", blob);
-            console.log(fd);
+            // console.log(blob);
+            // var fd = new FormData(document.forms[0]);
+            // fd.append("image", blob);
             // var data = {
             //   'url'  : 'https://www.mockupworld.co/wp-content/uploads/edd/2015/08/free-applewatch-mockup-psd-1000x683.jpg',
             // };
@@ -167,17 +164,16 @@ $(function() {
             };
 
             $.ajax({
-                url: "https://westus.api.cognitive.microsoft.com/vision/v1.0/tag?" + $.param(params),
+                url: "https://westus.api.cognitive.microsoft.com/vision/v1.0/tag" + $.param(params),
                 beforeSend: function(xhrObj){
                     // Request headers
-                    xhrObj.setRequestHeader("Content-Type","multipart/form-data");
+                    xhrObj.setRequestHeader("Content-Type","application/octet-stream");
                     xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","a864229fb6934f41839b4980d0af5024");
                 },
                 type: "POST",
                 processData: false,
-                //contentType: false,
                 // Request body
-                data: fd,
+                data: blob,
             })
             .done(function(data) {
                 alert("success");
