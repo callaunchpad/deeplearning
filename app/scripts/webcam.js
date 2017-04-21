@@ -23,6 +23,28 @@ $(function() {
       console.error(error);
   });
 
+  function dataURItoBlob(dataURI) {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+      byteString = atob(dataURI.split(',')[1]);
+    else
+      byteString = unescape(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ia], {
+      type: mimeString
+    });
+  }
+
   /*** GET WIDTH AND HEIGHT ***/
   video.addEventListener('canplay', function(ev) {
     if (!streaming) {
@@ -123,7 +145,57 @@ $(function() {
         }
 
         kairos.detect(image_data, kairosCallback, options);
+      } else if (mode == 'image-captioning'){
+          $('#action-button').text('Reset');
+
+
+         $(function() {
+          //image_data = image_data.replace('data:image/png;base64,', '');
+        // Dealing with Javascript Format of Image Strings
+            //console.log(test);
+            var dataURL = canvas.toDataURL('image/jpeg', 0.5);
+            var blob = dataURItoBlob(dataURL);
+            console.log(blob);
+            var fd = new FormData(document.forms[0]);
+            fd.append("image", blob);
+            console.log(fd);
+            // var data = {
+            //   'url'  : 'https://www.mockupworld.co/wp-content/uploads/edd/2015/08/free-applewatch-mockup-psd-1000x683.jpg',
+            // };
+            var params = {
+                // Request parameters
+            };
+
+            $.ajax({
+                url: "https://westus.api.cognitive.microsoft.com/vision/v1.0/tag?" + $.param(params),
+                beforeSend: function(xhrObj){
+                    // Request headers
+                    xhrObj.setRequestHeader("Content-Type","multipart/form-data");
+                    xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","a864229fb6934f41839b4980d0af5024");
+                },
+                type: "POST",
+                processData: false,
+                //contentType: false,
+                // Request body
+                data: fd,
+            })
+            .done(function(data) {
+                alert("success");
+            })
+            .fail(function(jqXHR, textStatus) {
+                alert("error");
+                console.log(jqXHR);
+                console.log(textStatus);
+
+            });
+          });
+
+
+
+          status = 'result';
+
       }
+
 
 
 
@@ -165,6 +237,8 @@ var changeMode = function(nextMode) {
     startGlassesDemo();
     $('#speech').text('Let\'s see how you look in glasses.');
   }
+
+
 
   mode = nextMode;
 }

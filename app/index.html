@@ -98,6 +98,10 @@
             <input name="features" type="radio" id="glasses" onclick="changeMode('glasses')" />
             <label for="glasses">Glasses</label>
           </p>
+          <p>
+            <input name="features" type="radio" id="product" onclick="changeMode('image-captioning')" />
+            <label for="product">Image Captioning</label>
+          </p>
         </form>
 
         <video></video>
@@ -141,6 +145,7 @@
     <script src="scripts/glasses/objectdetect.frontalface_alt.js"></script>
     <script src="scripts/glasses/startdemo.js"></script>
 
+    <script src="scripts/canvas-to-blob.min.js"></script>
     <script src="scripts/kairos.js"></script>
     <script src="scripts/webcam.js"></script>
     <!-- endbuild -->
