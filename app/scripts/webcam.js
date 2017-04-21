@@ -10,8 +10,11 @@ $(function() {
   /*** BEGIN WEBCAM ***/
   navigator.getMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
 
-  navigator.getMedia({ video: true, audio: false }, function(stream) {
-    if(navigator.mozGetUserMedia)
+  navigator.getMedia({
+    video: true,
+    audio: false
+  }, function(stream) {
+    if (navigator.mozGetUserMedia)
       video.mozSrcObject = stream;
     else {
       var vu = window.URL || window.webkitURL;
@@ -19,7 +22,7 @@ $(function() {
     }
     video.play();
   }, function(error) {
-    if(window.console)
+    if (window.console)
       console.error(error);
   });
 
@@ -94,7 +97,9 @@ $(function() {
         image_data = image_data.replace('data:image/png;base64,', '');
         image_data = image_data.replace('data:image/gif;base64,', '');
         image_data = image_data.replace('data:image/bmp;base64,', '');
-        var options = {'selector': 'FULL'};
+        var options = {
+          'selector': 'FULL'
+        };
 
         function kairosCallback(res) {
           var jsonResponse = JSON.parse(res.responseText);
@@ -120,8 +125,8 @@ $(function() {
             }
             var bestRaceProb = 0.0;
             var bestRace = 'asian';
-            for(var race in raceProbs) {
-              if(raceProbs.hasOwnProperty(race) && raceProbs[race] >= bestRaceProb) {
+            for (var race in raceProbs) {
+              if (raceProbs.hasOwnProperty(race) && raceProbs[race] >= bestRaceProb) {
                 bestRaceProb = raceProbs[race];
                 bestRace = race;
               }
@@ -133,7 +138,7 @@ $(function() {
               gender = 'guy';
             }
 
-            $('#speech').text('You look ' + (bestRaceProb * 100) + '% like a ' + faces[0]['attributes']['age'] + '-year-old ' + bestRace + ' ' + gender +'.');
+            $('#speech').text('You look ' + (bestRaceProb * 100) + '% like a ' + faces[0]['attributes']['age'] + '-year-old ' + bestRace + ' ' + gender + '.');
           } else {
             $('#speech').text('Sorry, I can\'t see where your face is.');
           }
@@ -145,57 +150,46 @@ $(function() {
         }
 
         kairos.detect(image_data, kairosCallback, options);
-      } else if (mode == 'image-captioning'){
-          $('#action-button').text('Reset');
+      } else if (mode == 'image-captioning') {
+        $('#action-button').text('Reset');
 
 
-         $(function() {
-            //var test = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-            var dataURL = canvas.toDataURL('image/jpeg', 0.5);
-            var blob = dataURItoBlob(dataURL);
-            // console.log(blob);
-            // var fd = new FormData(document.forms[0]);
-            // fd.append("image", blob);
-            // var data = {
-            //   'url'  : 'https://www.mockupworld.co/wp-content/uploads/edd/2015/08/free-applewatch-mockup-psd-1000x683.jpg',
-            // };
-            var params = {
-                // Request parameters
-            };
+        $(function() {
+          var dataURL = canvas.toDataURL('image/jpeg', 0.5);
+          var blob = dataURItoBlob(dataURL);
+          var params = {
+            "maxCandidates": "1"
+          };
 
-            $.ajax({
-                url: "https://westus.api.cognitive.microsoft.com/vision/v1.0/tag" + $.param(params),
-                beforeSend: function(xhrObj){
-                    // Request headers
-                    xhrObj.setRequestHeader("Content-Type","application/octet-stream");
-                    xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","a864229fb6934f41839b4980d0af5024");
-                },
-                type: "POST",
-                processData: false,
-                // Request body
-                data: blob,
-            })
-            .done(function(data) {
-                alert("success");
-            })
-            .fail(function(jqXHR, textStatus) {
-                alert("error");
-                console.log(jqXHR);
-                console.log(textStatus);
+          $.ajax({
+            url: "https://westus.api.cognitive.microsoft.com/vision/v1.0/describe?" + $.param(params),
+            beforeSend: function(xhrObj) {
+              xhrObj.setRequestHeader("Content-Type", "application/octet-stream");
+              xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", "a864229fb6934f41839b4980d0af5024");
+            },
+            type: "POST",
+            processData: false,
+            data: blob,
+            success: function(data) {
+              console.log(data);
+              $('#speech').text('I see ' + data.description.captions[0].text + '!');
 
-            });
-          });
+              // Hide overlay
+              $('.overlay').css('display', 'none');
+            },
+            error: function(jqXHR, textStatus) {
+              $('#speech').text('Sorry, server error.');
 
+              // Hide overlay
+              $('.overlay').css('display', 'none');
+            }
+          })
+        });
 
-
-          status = 'result';
-
+        status = 'result';
       }
 
-
-
-
-    /*** ON LIVE, GET IMG ***/
+      /*** ON LIVE, GET IMG ***/
     } else if (status == 'result') {
       status = 'live';
 
@@ -212,7 +206,6 @@ $(function() {
     }
   });
 });
-
 
 /*** HANDLE SWITCHING BETWEEN MODES ***/
 var mode = 'face';
@@ -233,8 +226,6 @@ var changeMode = function(nextMode) {
     startGlassesDemo();
     $('#speech').text('Let\'s see how you look in glasses.');
   }
-
-
 
   mode = nextMode;
 }
