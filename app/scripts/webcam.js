@@ -158,16 +158,16 @@ $(function() {
           var dataURL = canvas.toDataURL('image/jpeg', 0.5);
           var blob = dataURItoBlob(dataURL);
           var params = {
-            "maxCandidates": "1"
+            'maxCandidates': '1'
           };
 
           $.ajax({
-            url: "https://westus.api.cognitive.microsoft.com/vision/v1.0/describe?" + $.param(params),
+            url: 'https://westus.api.cognitive.microsoft.com/vision/v1.0/describe?' + $.param(params),
             beforeSend: function(xhrObj) {
-              xhrObj.setRequestHeader("Content-Type", "application/octet-stream");
-              xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", "a864229fb6934f41839b4980d0af5024");
+              xhrObj.setRequestHeader('Content-Type', 'application/octet-stream');
+              xhrObj.setRequestHeader('Ocp-Apim-Subscription-Key', 'a864229fb6934f41839b4980d0af5024');
             },
-            type: "POST",
+            type: 'POST',
             processData: false,
             data: blob,
             success: function(data) {
