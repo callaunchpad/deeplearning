@@ -75,7 +75,7 @@
           </div>
           <div class="col s12 m9">
             <h3>Hi, I'm Sherlock!</h3>
-            <p>I'm an artifical intelligence that can recognize things through your webcam. Currently, I can recognize a different objects and find human faces. Later, I'll be able to help you shop for different items! To find out what I know, select an option on the menu in the top left and send me a snap.</p>
+            <p>I'm an artifical intelligence that can recognize things through your webcam. Currently, I can recognize a different objects and find human faces. To find out what I know, select an option on the menu in the top left and send me a snap.</p>
           </div>
         </div>
       </div>
@@ -99,8 +99,12 @@
             <label for="glasses">Glasses</label>
           </p>
           <p>
-            <input name="features" type="radio" id="product" onclick="changeMode('image-captioning')" />
-            <label for="product">Image Captioning</label>
+            <input name="features" type="radio" id="captioning" onclick="changeMode('captioning')" />
+            <label for="captioning">Image Captioning</label>
+          </p>
+          <p>
+            <input name="features" type="radio" id="scan" onclick="changeMode('scan')" />
+            <label for="scan">Scan Document</label>
           </p>
         </form>
 

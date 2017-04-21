@@ -150,7 +150,7 @@ $(function() {
         }
 
         kairos.detect(image_data, kairosCallback, options);
-      } else if (mode == 'image-captioning') {
+      } else if (mode == 'captioning') {
         $('#action-button').text('Reset');
 
 
@@ -171,24 +171,89 @@ $(function() {
             processData: false,
             data: blob,
             success: function(data) {
-              console.log(data);
               $('#speech').text('I see ' + data.description.captions[0].text + '!');
-
-              // Hide overlay
               $('.overlay').css('display', 'none');
             },
             error: function(jqXHR, textStatus) {
               $('#speech').text('Sorry, server error.');
-
-              // Hide overlay
               $('.overlay').css('display', 'none');
             }
           })
         });
 
         status = 'result';
-      }
+      } else if (mode == 'scan') {
+        $('#action-button').text('Reset');
 
+        $(function() {
+          var dataURL = canvas.toDataURL('image/jpeg', 0.5);
+          var blob = dataURItoBlob(dataURL);
+          var params = {
+            'handwriting': 'false'
+          };
+
+          $.ajax({
+            url: 'https://westus.api.cognitive.microsoft.com/vision/v1.0/recognizeText?' + $.param(params),
+            beforeSend: function(xhrObj) {
+              xhrObj.setRequestHeader('Content-Type', 'application/octet-stream');
+              xhrObj.setRequestHeader('Ocp-Apim-Subscription-Key', 'a864229fb6934f41839b4980d0af5024');
+            },
+            type: 'POST',
+            processData: false,
+            data: blob,
+            success: function(data) {
+              console.log(data);
+
+              if (data.orientation == 'NotDetected') {
+                $('#speech').text('I don\'t see any text.');
+                $('.overlay').css('display', 'none');
+                return;
+              }
+
+              var detectedText = 'Here\'s the text I see: ';
+              console.log(detectedText);
+
+              var regions = data.regions;
+              for (var i = 0; i < regions.length; i++) {
+                var region = regions[i];
+                var lines = region.lines;
+                for (var j = 0; j < lines.length; j++) {
+                  var line = lines[j];
+                  var words = line.words;
+
+                  var boundingBox = line.boundingBox;
+                  var coords = boundingBox.split(',');
+                  for (var k = 0; k < coords.length; k++) {
+                    coords[k] = parseInt(coords[k]);
+                  }
+
+                  context.lineWidth = '6';
+                  context.strokeStyle = 'red';
+                  context.rect(coords[0], coords[1], coords[2], coords[3]);
+                  context.stroke();
+
+                  for (var k = 0; k < words.length; k++) {
+                    var word = words[k];
+                    detectedText += word.text + ' ';
+                  }
+
+                  detectedText += '. ';
+                }
+              }
+
+              console.log(detectedText);
+              $('#speech').text(detectedText);
+              $('.overlay').css('display', 'none');
+            },
+            error: function(jqXHR, textStatus) {
+              $('#speech').text('Sorry, server error.');
+              $('.overlay').css('display', 'none');
+            }
+          });
+        });
+
+        status = 'result';
+      }
       /*** ON LIVE, GET IMG ***/
     } else if (status == 'result') {
       status = 'live';
