@@ -148,7 +148,8 @@ $(function() {
               } else if (bestRace == 'black') {
 
               } else if (bestRace == 'hispanic') {
-
+                var elem = ['paella', 'burrito', 'quesadilla', 'fajita', 'churro', 'tequilla'];
+                recommendedFood = elem[Math.floor(Math.random()*elem.length)];
               } else if (bestRace == 'other') {
 
               } else if (bestRace == 'white') {
