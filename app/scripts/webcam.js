@@ -103,6 +103,7 @@ $(function() {
 
         function kairosCallback(res) {
           var jsonResponse = JSON.parse(res.responseText);
+          console.log(jsonResponse);
 
           if (!!jsonResponse.images) {
             var faces = jsonResponse.images[0].faces;
@@ -148,7 +149,8 @@ $(function() {
               } else if (bestRace == 'black') {
 
               } else if (bestRace == 'hispanic') {
-
+                var elem = ['paella', 'burrito', 'quesadilla', 'fajita', 'churro', 'tequilla'];
+                recommendedFood = elem[Math.floor(Math.random()*elem.length)];
               } else if (bestRace == 'other') {
 
               } else if (bestRace == 'white') {
