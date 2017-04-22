@@ -103,6 +103,7 @@ $(function() {
 
         function kairosCallback(res) {
           var jsonResponse = JSON.parse(res.responseText);
+          console.log(jsonResponse);
 
           if (!!jsonResponse.images) {
             var faces = jsonResponse.images[0].faces;
