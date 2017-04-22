@@ -85,8 +85,8 @@ $(function() {
       $('video').css('display', 'none');
       $('canvas').css('display', 'block');
 
-      // Face Recognition
-      if (mode == 'face') {
+      // Face Recognition or Food Recommender
+      if (mode == 'face' || mode == 'food') {
         // Change action button text
         $('#action-button').text('Reset');
 
@@ -137,10 +137,30 @@ $(function() {
             if (faces[0]['attributes']['gender']['type'] == 'M') {
               gender = 'guy';
             }
+          
+            if (mode == 'face') {
+              $('#speech').text('You look ' + (bestRaceProb * 100) + '% like a ' + faces[0]['attributes']['age'] + '-year-old ' + bestRace + ' ' + gender + '.');
+            } else {
+              var recommendedFood = 'hamburgers';
+              if (bestRace == 'asian') {
 
-            $('#speech').text('You look ' + (bestRaceProb * 100) + '% like a ' + faces[0]['attributes']['age'] + '-year-old ' + bestRace + ' ' + gender + '.');
+              } else if (bestRace == 'black') {
+
+              } else if (bestRace == 'hispanic') {
+
+              } else if (bestRace == 'other') {
+
+              } else if (bestRace == 'white') {
+
+              }
+              $('#speech').text('You look like that you enjoy ' + recommendedFood + '.');
+            }
           } else {
-            $('#speech').text('Sorry, I can\'t see where your face is.');
+            if (mode == 'face') {
+              $('#speech').text('Sorry, I can\'t see where your face is.');
+            } else {
+              $('#speech').text('I think you should eat a hamburger.');
+            }
           }
 
           status = 'result';
