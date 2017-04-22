@@ -144,17 +144,20 @@ $(function() {
             } else {
               var recommendedFood = 'hamburgers';
               if (bestRace == 'asian') {
-                var asianFood = ['fried rice', 'dumplings', 'tofu', 'noodles', 'sushi', 'udon'];
-                recommendedFood = asianFood[Math.floor(Math.random() * asianFood.length)];
+                var elem = ['fried rice', 'dumplings', 'tofu', 'noodles', 'sushi', 'udon'];
+                recommendedFood = elem[Math.floor(Math.random() * elem.length)];
               } else if (bestRace == 'black') {
-
+                var elem = ['macaroni and cheese', 'catfish', 'watermelon', 'mashed potatoes', 'fried chicken'];
+                recommendedFood = elem[Math.floor(Math.random() * items.length)];
               } else if (bestRace == 'hispanic') {
                 var elem = ['paella', 'burrito', 'quesadilla', 'fajita', 'churro', 'tequilla'];
                 recommendedFood = elem[Math.floor(Math.random()*elem.length)];
               } else if (bestRace == 'other') {
-
+                var elem = ['donuts', 'ice cream'];
+                recommendedFood = elem[Math.floor(Math.random() * elem.length)];
               } else if (bestRace == 'white') {
-
+                var elem = ['white chocolate frappes'];
+                recommendedFood = elem[Math.floor(Math.random() * elem.length)];
               }
               $('#speech').text('You look like that you enjoy ' + recommendedFood + '.');
             }
