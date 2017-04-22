@@ -143,7 +143,8 @@ $(function() {
             } else {
               var recommendedFood = 'hamburgers';
               if (bestRace == 'asian') {
-
+                var asianFood = ['fried rice', 'dumplings', 'tofu', 'noodles', 'sushi', 'udon'];
+                recommendedFood = asianFood[Math.floor(Math.random() * asianFood.length)];
               } else if (bestRace == 'black') {
 
               } else if (bestRace == 'hispanic') {
